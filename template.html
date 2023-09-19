@@ -1,0 +1,133 @@
+<!--Do not change/dublicate the comments with $ mark, your name, grades etc. will be generated wherever those comments exists-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <title>Grade Report</title>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            max-width: 800px;
+        }
+
+        h1 {
+            color: #333;
+            margin-right: auto;
+            margin-left: 20px;
+        }
+
+        .student-info {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .student-img {
+            max-width: 100px;
+            border-radius: 50%;
+            margin-right: auto;
+        }
+
+        .college-logo {
+            max-width: 300px;
+            margin-right: 20px;
+        }
+
+        table {
+            /* width: 100%; */
+            max-width: 1000px;
+            border-collapse: collapse;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        footer {
+            background-color: #4e5c7944;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="container">
+            <h1>Grade Report</h1>
+            <img class="college-logo" src="https://iiitr.ac.in/assets/images/logo-blue-desktop.png"
+                alt="IIIT Raichur Logo">
+        </div>
+        <div class="student-info">
+            <div class="container">
+                <img class="student-img" src="<!--$img-src-->" alt="Student Photo">
+                <div>
+                    <h2><!--$student_name--></h2>
+                    <p>Roll No: <a href="mailto:<!--$email-->"><!--$rollno--></a><br>
+                        <!--$branch--><br>
+                        Indian Institute of Information Technology Raichur<br>
+                        CGPA: <!--CGPA-->
+                    </p>
+                </div>
+            </div>
+        </div>
+        <table>
+            <tr>
+                <th>Course ID</th>
+                <th>Course Name</th>
+                <th>Credits</th>
+                <th>Grade</th>
+            </tr>
+            <!--$grade_card-->
+            <tr>
+                <th></th>
+                <th></th>
+                <th>CGPA</th>
+                <th><!--CGPA--></th>
+            </tr>
+        </table>
+        <footer>
+            <!-- <div><p>&copy; 2023 ShivanshuKGupta. All rights reserved.</p></div> -->
+            <div><a href="https://www.github.com/ShivanshuKGupta">@ShivanshuKGupta</a></div>
+            <div><!--$date--></div>
+            <div><a href="javascript:window.print()">Print</a></div>
+        </footer>
+    </div>
+</body>
+
+</html>
