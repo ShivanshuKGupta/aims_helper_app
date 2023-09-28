@@ -1,7 +1,12 @@
 from selenium import webdriver
 import re
 import os
+import sys
 
+
+def dbg(msg):
+    if('-d' in sys.argv):
+        print(msg)
 
 def search(l, e):
     """Returns list of indexes where element [e] is found in list [l]"""
@@ -75,20 +80,21 @@ if student_name == None:
     print("Student name can't be extracted. Aborting.")
     exit(1)
 student_name = student_name.group(1)
-print(f"Extracted {student_name=}")
+dbg(f"Extracted {student_name=}")
 
 cur_date_time = re.search(r'currentDateTime\s+=\s+"(.*?)"', src_code)
 if cur_date_time == None:
     print("Date can't be extracted. Aborting.")
+    input()
     exit(1)
 cur_date_time = cur_date_time.group(1)
-print(f"Extracted {cur_date_time=}")
+dbg(f"Extracted {cur_date_time=}")
 
 # Extracting data from html
 print("Extracting student info...")
 StudentInfo = [element.text for element in driver.find_elements(
     by='class name', value='flexDiv')]
-print(f"{StudentInfo=}")
+dbg(f"{StudentInfo=}")
 
 roll_no = StudentInfo[0].split('\n')[1]
 branch_name = StudentInfo[1].split('\n')[1]
@@ -99,47 +105,47 @@ image_source = image_element.get_attribute("src")
 print("Extracting course ids...")
 course_ids = [element.text for element in driver.find_elements(
     by='class name', value='col1')]
-print(f"{course_ids=}")
+dbg(f"{course_ids=}")
 
 print("Extracting course names...")
 course_names = [element.text for element in driver.find_elements(
     by='class name', value='col2')]
-print(f"{course_names=}")
+dbg(f"{course_names=}")
 
 print("Extracting credits...")
 credits = [element.text for element in driver.find_elements(
     by='class name', value='col3')]
-print(f"{credits=}")
+dbg(f"{credits=}")
 
 print("Extracting course registration types...")
 course_reg_type = [element.text for element in driver.find_elements(
     by='class name', value='col4')]
-print(f"{course_reg_type=}")
+dbg(f"{course_reg_type=}")
 
 print("Extracting course elective types...")
 course_elective_type = [element.text for element in driver.find_elements(
     by='class name', value='col5')]
-print(f"{course_elective_type=}")
+dbg(f"{course_elective_type=}")
 
 print("Extracting segment\'s info...")
 segment = [element.text for element in driver.find_elements(
     by='class name', value='col6')]
-print(f"{segment=}")
+dbg(f"{segment=}")
 
 print("Extracting course instructors...")
 course_instructor = [element.text for element in driver.find_elements(
     by='class name', value='col7')]
-print(f"{course_instructor=}")
+dbg(f"{course_instructor=}")
 
 print("Extracting your grades...")
 grades: list[str] = [element.text for element in driver.find_elements(
     by='class name', value='col8')]
-print(f"{grades=}")
+dbg(f"{grades=}")
 
 print("Extracting course registration date...")
 course_reg_date = [element.text for element in driver.find_elements(
     by='class name', value='col9')]
-print(f"{course_reg_date=}")
+dbg(f"{course_reg_date=}")
 
 html_output = ""
 courses = []
@@ -154,7 +160,7 @@ for i in range(1, len(course_ids)):
     ans = i
     if len(same_courses) > 1:
         for j in range(len(same_courses)):
-            if grades[j] > grades[ans]:
+            if grade_point(grades[j]) > grade_point(grades[ans]):
                 ans = j
     if (i != ans):
         continue
@@ -171,7 +177,7 @@ for i in range(1, len(course_ids)):
     courses += [course]
     credit = float(course.credits)
     score += credit*grade_point(course.grade)
-    print(f"{course.grade=}, {credit=}, {score=}")
+    dbg(f"{course.grade=}, {credit=}, {score=}")
     total_score += credit*grade_point('A')
     html_output += str(course)
 
@@ -192,7 +198,7 @@ with open("output.html", "w+") as output_file:
     template = template.replace("<!--CGPA-->", str(CGPA))
     template = template.replace(
         "<!--$email-->", f"{roll_no.lower()}@iiitr.ac.in")
-    print(f"{template=}")
+    dbg(f"{template=}")
     output_file.write(template)
 
 print(
