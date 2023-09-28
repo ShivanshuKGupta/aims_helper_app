@@ -5,8 +5,9 @@ import sys
 
 
 def dbg(msg):
-    if('-d' in sys.argv):
+    if ('-d' in sys.argv):
         print(msg)
+
 
 def search(l, e):
     """Returns list of indexes where element [e] is found in list [l]"""
@@ -195,7 +196,8 @@ with open("output.html", "w+") as output_file:
     template = template.replace("<!--$branch-->", branch_name)
     template = template.replace("<!--$grade_card-->", html_output)
     template = template.replace("<!--$date-->", cur_date_time)
-    template = template.replace("<!--CGPA-->", str(CGPA))
+    template = template.replace("<!--$CGPA-->", str(CGPA))
+    template = template.replace("<!--$total-credits-->", str(total_score/10))
     template = template.replace(
         "<!--$email-->", f"{roll_no.lower()}@iiitr.ac.in")
     dbg(f"{template=}")
