@@ -160,7 +160,8 @@ for i in range(1, len(course_ids)):
     same_courses = search(course_ids, course_ids[i])
     ans = i
     if len(same_courses) > 1:
-        for j in range(len(same_courses)):
+        print("same courses found:", same_courses)
+        for j in same_courses:
             if grade_point(grades[j]) > grade_point(grades[ans]):
                 ans = j
     if (i != ans):
